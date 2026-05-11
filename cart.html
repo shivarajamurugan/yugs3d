@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Your Cart | YUGS 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .cart-item {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            background: var(--bg-card);
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 15px;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        .cart-img {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+        .cart-info {
+            flex-grow: 1;
+        }
+        .remove-btn {
+            background: transparent;
+            color: #ff4444;
+            border: 1px solid #ff4444;
+            padding: 5px 12px;
+            cursor: pointer;
+            border-radius: 4px;
+            font-size: 0.8rem;
+            transition: 0.3s;
+        }
+        .remove-btn:hover {
+            background: #ff4444;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="store.html">Store</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="font-heading text-center" style="margin-bottom: 40px;">YOUR <span class="text-orange">CART</span></h2>
+            
+            <div id="cart-items" style="max-width: 700px; margin: 0 auto;">
+                <!-- Items injected here -->
+            </div>
+
+            <div class="text-center" style="margin-top: 40px;">
+                <h3 id="total-price" style="margin-bottom: 20px;">Total: ₹0</h3>
+                <button class="btn-yugs" onclick="sendWhatsApp()">ORDER VIA WHATSAPP</button>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function displayCart() {
+            const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            const container = document.getElementById('cart-items');
+            let total = 0;
+            
+            if (cart.length === 0) {
+                container.innerHTML = "<p class='text-center'>Your cart is empty.</p>";
+                document.getElementById('total-price').innerText = "Total: ₹0";
+                return;
+            }
+
+            container.innerHTML = cart.map((item, index) => {
+                total += item.price;
+                return `
+                    <div class="cart-item">
+                        <img src="${item.image}" class="cart-img" alt="${item.name}">
+                        <div class="cart-info">
+                            <h4 style="margin: 0;">${item.name}</h4>
+                            <span class="text-orange">₹${item.price}</span>
+                        </div>
+                        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                    </div>
+                `;
+            }).join('');
+
+            document.getElementById('total-price').innerText = "Total: ₹" + total;
+        }
+
+        function removeItem(index) {
+            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            // Remove the item at the specific index
+            cart.splice(index, 1);
+            // Save updated cart
+            localStorage.setItem('yugs_cart', JSON.stringify(cart));
+            // Refresh display
+            displayCart();
+        }
+
+        function sendWhatsApp() {
+            const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            if (cart.length === 0) return alert("Cart is empty!");
+
+            let phoneNumber = "918524960408"; 
+            let message = "Hello YUGS 3D! 👋%0aI want to order:%0a%0a";
+            let total = 0;
+
+            cart.forEach((item, i) => {
+                message += `${i+1}. ${item.name} - ₹${item.price}%0a`;
+                total += item.price;
+            });
+
+            message += `%0a*Total: ₹${total}*`;
+            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
+        }
+
+        displayCart();
+    </script>
+</body>
+</html>

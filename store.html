@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Store | YUGS 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="store.html" class="active">Store</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+                <!-- Clicking this takes you to the Cart page -->
+                <a href="cart.html" class="btn-yugs" style="text-decoration: none;">
+                    🛒 Cart (<span id="count">0</span>)
+                </a>
+            </nav>
+        </div>
+    </header>
+
+    <section class="section-padding">
+        <div class="container">
+            <h2 class="font-heading" style="margin-bottom: 50px; text-align: center;">FEATURED <span
+                    class="text-orange">PRODUCTS</span></h2>
+            <div class="grid">
+
+                <!-- Product 1 -->
+                <div class="card-yugs">
+                    <div class="image-container">
+                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.04 PM.jpeg" alt="Hex Pot">
+                    </div>
+                    <h4>Hex Geometric Pot</h4>
+                    <p class="text-orange">₹499</p>
+                    <button class="btn-yugs" onclick="updateCart('Hex Geometric Pot', 499)"
+                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
+                </div>
+
+                <!-- Product 2 -->
+                <div class="card-yugs">
+                    <div class="image-container">
+                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.06 PM.jpeg" alt="EDC Tray">
+                    </div>
+                    <h4>EDC Tech Tray</h4>
+                    <p class="text-orange">₹899</p>
+                    <button class="btn-yugs" onclick="updateCart('EDC Tech Tray', 899)"
+                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
+                </div>
+
+                <!-- Product 3 -->
+                <div class="card-yugs">
+                    <div class="image-container">
+                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.08 PM.jpeg" alt="Mechanical Part">
+                    </div>
+                    <h4>Industrial Gear Set</h4>
+                    <p class="text-orange">₹1299</p>
+                    <button class="btn-yugs" onclick="updateCart('Industrial Gear Set', 1299)"
+                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
+                </div>
+                <!-- Product 3 -->
+                <div class="card-yugs">
+                    <div class="image-container">
+                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.24 PM (1).jpeg" alt="Mechanical Part">
+                    </div>
+                    <h4>Industrial Gear Set</h4>
+                    <p class="text-orange">₹1299</p>
+                    <button class="btn-yugs" onclick="updateCart('Industrial Gear Set', 1299)"
+                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <script>
+        function updateCart(productName, price) {
+            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            cart.push({ name: productName, price: price });
+            localStorage.setItem('yugs_cart', JSON.stringify(cart));
+
+            // Update counter
+            document.getElementById('count').innerText = cart.length;
+            alert(productName + " added to cart!");
+        }
+
+        // Load count on startup
+        window.onload = function () {
+            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            document.getElementById('count').innerText = cart.length;
+        }
+    </script>
+</body>
+
+</html>
