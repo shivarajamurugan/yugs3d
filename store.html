@@ -11,94 +11,571 @@
 </head>
 
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+
+   <header>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">YUGS <span>3D</span></a>
+            <div class="nav-container">
                 <ul class="nav-links">
                     <li><a href="index.html">Home</a></li>
                     <li><a href="about.html">About</a></li>
                     <li><a href="store.html" class="active">Store</a></li>
                     <li><a href="contact.html">Contact</a></li>
                 </ul>
-                <!-- Clicking this takes you to the Cart page -->
-                <a href="cart.html" class="btn-yugs" style="text-decoration: none;">
-                    🛒 Cart (<span id="count">0</span>)
-                </a>
-            </nav>
-        </div>
-    </header>
+                <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
+                
+                <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
 
     <section class="section-padding">
         <div class="container">
-            <h2 class="font-heading" style="margin-bottom: 50px; text-align: center;">FEATURED <span
-                    class="text-orange">PRODUCTS</span></h2>
-            <div class="grid">
+            <h2 class="font-heading text-center" style="margin-bottom:40px;">
+                FEATURED <span class="text-orange">PRODUCTS</span>
+            </h2>
 
-                <!-- Product 1 -->
-                <div class="card-yugs">
-                    <div class="image-container">
-                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.04 PM.jpeg" alt="Hex Pot">
+            <div class="store-layout">
+                <aside class="filter-sidebar">
+                    <h3>Filters</h3>
+                    <div class="filter-group">
+                        <label>Search Product</label>
+                        <input type="text" id="searchInput" placeholder="Type keyphrase..." onkeyup="filterProducts()">
                     </div>
-                    <h4>Hex Geometric Pot</h4>
-                    <p class="text-orange">₹499</p>
-                    <button class="btn-yugs" onclick="updateCart('Hex Geometric Pot', 499)"
-                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
-                </div>
+                    <div class="filter-group">
+                        <label>Category</label>
+                        <select id="categoryFilter" onchange="filterProducts()">
+                            <option value="all">All Categories</option>
+                            <option value="organizer">Organizer</option>
+                            <option value="holder">Holder</option>
+                            <option value="phone-stand">Phone Stand</option>
+                            <option value="headphone-stand">Headphone Stand</option>
+                            <option value="planter">Planter</option>
+                            <option value="vase">Vase</option>
+                            <option value="jewelry">Jewelry Stand</option>
+                            <option value="shelf">Shelf</option>
+                            <option value="storage">Storage Box</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Price Range</label>
+                        <select id="priceFilter" onchange="filterProducts()">
+                            <option value="all">All Prices</option>
+                            <option value="under300">Under ₹300</option>
+                            <option value="300-500">₹300 - ₹500</option>
+                            <option value="500-1000">₹500 - ₹1000</option>
+                            <option value="1000-1500">₹1000 - ₹1500</option>
+                            <option value="above1500">Above ₹1500</option>
+                        </select>
+                    </div>
+                </aside>
 
-                <!-- Product 2 -->
-                <div class="card-yugs">
-                    <div class="image-container">
-                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.06 PM.jpeg" alt="EDC Tray">
-                    </div>
-                    <h4>EDC Tech Tray</h4>
-                    <p class="text-orange">₹899</p>
-                    <button class="btn-yugs" onclick="updateCart('EDC Tech Tray', 899)"
-                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
-                </div>
+                <div class="products-area">
+                    <div class="grid" id="productList">
+                        <!-- Product 1 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="1000">
+                            <div class="image-container">
+                                <img src="./images/img-1.jpeg" alt="Hex Pot">
+                            </div>
+                            <h4>Desk Organizer</h4>
+                            <p class="text-orange">₹1000</p>
+                            <button class="btn-yugs" onclick="updateCart('Desk Organizer', 1000, './images/img-1.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
 
-                <!-- Product 3 -->
-                <div class="card-yugs">
-                    <div class="image-container">
-                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.08 PM.jpeg" alt="Mechanical Part">
-                    </div>
-                    <h4>Industrial Gear Set</h4>
-                    <p class="text-orange">₹1299</p>
-                    <button class="btn-yugs" onclick="updateCart('Industrial Gear Set', 1299)"
-                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
-                </div>
-                <!-- Product 3 -->
-                <div class="card-yugs">
-                    <div class="image-container">
-                        <img src="./images/WhatsApp Image 2026-05-06 at 12.02.24 PM (1).jpeg" alt="Mechanical Part">
-                    </div>
-                    <h4>Industrial Gear Set</h4>
-                    <p class="text-orange">₹1299</p>
-                    <button class="btn-yugs" onclick="updateCart('Industrial Gear Set', 1299)"
-                        style="width: 100%; margin-top: 15px;">ADD TO CART</button>
-                </div>
+                        <!-- Product 2 -->
+                        <div class="card-yugs" data-category="Headphone Stand" data-price="899">
+                            <div class="image-container">
+                                <img src="./images/img-2.jpeg" alt="EDC Tray">
+                            </div>
+                            <h4>Cactus Headphone Stand</h4>
+                            <p class="text-orange">₹899</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Cactus Headphone Stand', 899, './images/img-2.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
 
+                        <!-- Product 3 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="1299">
+                            <div class="image-container">
+                                <img src="./images/img-3.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Smart Desk Mini cabinet</h4>
+                            <p class="text-orange">₹1299</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Smart Desk Mini cabinet', 1299, './images/img-3.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 4 -->
+                        <div class="card-yugs" data-category="Shelf" data-price="900">
+                            <div class="image-container">
+                                <img src="./images/img-4.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Modular Shelf</h4>
+                            <p class="text-orange">₹900</p>
+                            <button class="btn-yugs" onclick="updateCart('Modular Shelf', 900, './images/img-4.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 5 -->
+                        <div class="card-yugs" data-category="Pen Holder" data-price="899">
+                            <div class="image-container">
+                                <img src="./images/img-5.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Pot with Pen Holder</h4>
+                            <p class="text-orange">₹899</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Pot with Pen Holder', 899, './images/img-5.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 6 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="900">
+                            <div class="image-container">
+                                <img src="./images/img-6.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Female Hoodie Desk Organizer</h4>
+                            <p class="text-orange">₹900</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Female Hoodie Desk Organizer', 900, './images/img-6.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 7 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="1500">
+                            <div class="image-container">
+                                <img src="./images/img-7.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Desk Organizer</h4>
+                            <p class="text-orange">₹1500</p>
+                            <button class="btn-yugs" onclick="updateCart('Desk Organizer', 1500, './images/img-7.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 8 -->
+                        <div class="card-yugs" data-category="Makeup Holder" data-price="350">
+                            <div class="image-container">
+                                <img src="./images/img-8.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Bow Makeup Brush Holder</h4>
+                            <p class="text-orange">₹350</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Bow Makeup Brush Holder', 350, './images/img-8.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 9 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="400">
+                            <div class="image-container">
+                                <img src="./images/img-9.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Multi Purpose Organizer</h4>
+                            <p class="text-orange">₹400</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Multi Purpose Organizer', 400, './images/img-9.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 10 -->
+                        <div class="card-yugs" data-category="Organizer" data-price="2000">
+                            <div class="image-container">
+                                <img src="./images/img-10.jpeg" alt="Mechanical Part">
+                            </div>
+                            <h4>Desk Organizer</h4>
+                            <p class="text-orange">₹2000</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Desk Organizer', 2000, './images/img-10.jpeg')"
+                                style="width:100%;margin-top:15px;">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 11 -->
+                        <div class="card-yugs" data-category="organizer" data-price="400">
+                            <div class="image-container">
+                                <img src="./images/img-11.jpeg" alt="Pen Holder Paper Bag">
+                            </div>
+                            <h4>Pen Holder-Paper Bag</h4>
+                            <p class="text-orange">₹400</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Pen Holder-Paper Bag', 400, './images/img-11.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 12 -->
+                        <div class="card-yugs" data-category="holder" data-price="650">
+                            <div class="image-container">
+                                <img src="./images/img-12.jpeg" alt="Remote Holder">
+                            </div>
+                            <h4>Remote Holder</h4>
+                            <p class="text-orange">₹650</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Remote Holder', 650, './images/img-12.jpeg')">ADD TO CART</button>
+                        </div>
+
+                        <!-- Product 13 -->
+                        <div class="card-yugs" data-category="organizer" data-price="700">
+                            <div class="image-container">
+                                <img src="./images/img-13.jpeg" alt="Minimal Duo Desk Organizer">
+                            </div>
+                            <h4>Minimal Duo Desk Organizer</h4>
+                            <p class="text-orange">₹700</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Minimal Duo Desk Organizer', 700, './images/img-13.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 14 -->
+                        <div class="card-yugs" data-category="vase" data-price="400">
+                            <div class="image-container">
+                                <img src="./images/img-14.jpeg" alt="Wave Texture Vase Set">
+                            </div>
+                            <h4>Wave Texture Vase Set</h4>
+                            <p class="text-orange">₹400</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Wave Texture Vase Set', 400, './images/img-14.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 15 -->
+                        <div class="card-yugs" data-category="holder" data-price="1500">
+                            <div class="image-container">
+                                <img src="./images/img-15.jpeg" alt="Ellie Cute Pen Holder">
+                            </div>
+                            <h4>Ellie Cute Pen Holder</h4>
+                            <p class="text-orange">₹1500</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Ellie Cute Pen Holder', 1500, './images/img-15.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 16 -->
+                        <div class="card-yugs" data-category="jewelry" data-price="2000">
+                            <div class="image-container">
+                                <img src="./images/img-16.jpeg" alt="Royal Cat Jewelry Stand">
+                            </div>
+                            <h4>Royal Cat Jewelry Stand</h4>
+                            <p class="text-orange">₹2000</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Royal Cat Jewelry Stand', 2000, './images/img-16.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 17 -->
+                        <div class="card-yugs" data-category="jewelry" data-price="1700">
+                            <div class="image-container">
+                                <img src="./images/img-17.jpeg" alt="Elegant Ring Holder Set">
+                            </div>
+                            <h4>Elegant Ring Holder Set</h4>
+                            <p class="text-orange">₹1700</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Elegant Ring Holder Set', 1700, './images/img-17.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 18 -->
+                        <div class="card-yugs" data-category="planter" data-price="800">
+                            <div class="image-container">
+                                <img src="./images/img-18.jpeg" alt="Chubby Kitty Planter">
+                            </div>
+                            <h4>Chubby Kitty Planter</h4>
+                            <p class="text-orange">₹800</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Chubby Kitty Planter', 800, './images/img-18.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 19 -->
+                        <div class="card-yugs" data-category="organizer" data-price="350">
+                            <div class="image-container">
+                                <img src="./images/img-19.jpeg" alt="Cute Cat Pen Organizer">
+                            </div>
+                            <h4>Cute Cat Pen Organizer</h4>
+                            <p class="text-orange">₹350</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Cute Cat Pen Organizer', 350, './images/img-19.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 20 -->
+                        <div class="card-yugs" data-category="phone-stand" data-price="500">
+                            <div class="image-container">
+                                <img src="./images/img-20.jpeg" alt="Lazy Panda Phone Stand">
+                            </div>
+                            <h4>Lazy Panda Phone Stand</h4>
+                            <p class="text-orange">₹500</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Lazy Panda Phone Stand', 500, './images/img-20.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 21 -->
+                        <div class="card-yugs" data-category="jewelry" data-price="1000">
+                            <div class="image-container">
+                                <img src="./images/img-21.jpeg" alt="Mystic Tree Jewelry Stand">
+                            </div>
+                            <h4>Mystic Tree Jewelry Stand</h4>
+                            <p class="text-orange">₹1000</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Mystic Tree Jewelry Stand', 1000, './images/img-21.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 22 -->
+                        <div class="card-yugs" data-category="holder" data-price="400">
+                            <div class="image-container">
+                                <img src="./images/img-22.jpeg" alt="Kitty Smile Toothbrush Holder">
+                            </div>
+                            <h4>Kitty Smile Toothbrush Holder</h4>
+                            <p class="text-orange">₹400</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Kitty Smile Toothbrush Holder', 400, './images/img-22.jpeg')">ADD
+                                TO CART</button>
+                        </div>
+
+                        <!-- Product 23 -->
+                        <div class="card-yugs" data-category="holder" data-price="350">
+                            <div class="image-container">
+                                <img src="./images/img-23.jpeg" alt="Pink Bow Pen Holder">
+                            </div>
+                            <h4>Pink Bow Pen Holder</h4>
+                            <p class="text-orange">₹350</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Pink Bow Pen Holder', 350, './images/img-23.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 24 -->
+                        <div class="card-yugs" data-category="phone-stand" data-price="1000">
+                            <div class="image-container">
+                                <img src="./images/img-24.jpeg" alt="Lazy Cat Phone Stand">
+                            </div>
+                            <h4>Lazy Cat Phone Stand</h4>
+                            <p class="text-orange">₹1000</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Lazy Cat Phone Stand', 1000, './images/img-24.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 25 -->
+                        <div class="card-yugs" data-category="planter" data-price="900">
+                            <div class="image-container">
+                                <img src="./images/img-25.jpeg" alt="Floral Kitty Decor Pot">
+                            </div>
+                            <h4>Floral Kitty Decor Pot</h4>
+                            <p class="text-orange">₹900</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Floral Kitty Decor Pot', 900, './images/img-25.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 26 -->
+                        <div class="card-yugs" data-category="headphone-stand" data-price="800">
+                            <div class="image-container">
+                                <img src="./images/img-26.jpeg" alt="Bunny Ear Headphone Stand">
+                            </div>
+                            <h4>Bunny Ear Headphone Stand</h4>
+                            <p class="text-orange">₹800</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Bunny Ear Headphone Stand', 800, './images/img-26.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 27 -->
+                        <div class="card-yugs" data-category="planter" data-price="750">
+                            <div class="image-container">
+                                <img src="./images/img-27.jpeg" alt="Glow Cat Mini Planter">
+                            </div>
+                            <h4>Glow Cat Mini Planter</h4>
+                            <p class="text-orange">₹750</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Glow Cat Mini Planter', 750, './images/img-27.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 28 -->
+                        <div class="card-yugs" data-category="holder" data-price="300">
+                            <div class="image-container">
+                                <img src="./images/img-28.jpeg" alt="Ribbon Makeup Brush Holder">
+                            </div>
+                            <h4>Ribbon Makeup Brush Holder</h4>
+                            <p class="text-orange">₹300</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Ribbon Makeup Brush Holder', 300, './images/img-28.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 29 -->
+                        <div class="card-yugs" data-category="vase" data-price="550">
+                            <div class="image-container">
+                                <img src="./images/img-29.jpeg" alt="Blossom Bow Flower Vase">
+                            </div>
+                            <h4>Blossom Bow Flower Vase</h4>
+                            <p class="text-orange">₹550</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Blossom Bow Flower Vase', 550, './images/img-29.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 30 -->
+                        <div class="card-yugs" data-category="jewelry" data-price="600">
+                            <div class="image-container">
+                                <img src="./images/img-30.jpeg" alt="Angel Ring Jewelry Holder">
+                            </div>
+                            <h4>Angel Ring Jewelry Holder</h4>
+                            <p class="text-orange">₹600</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Angel Ring Jewelry Holder', 600, './images/img-30.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 31 -->
+                        <div class="card-yugs" data-category="phone-stand" data-price="450">
+                            <div class="image-container">
+                                <img src="./images/img-31.jpeg" alt="Mini Dino Phone Stand">
+                            </div>
+                            <h4>Mini Dino Phone Stand</h4>
+                            <p class="text-orange">₹450</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Mini Dino Phone Stand', 450, './images/img-31.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 32 -->
+                        <div class="card-yugs" data-category="organizer" data-price="850">
+                            <div class="image-container">
+                                <img src="./images/img-32.jpeg" alt="Ribbon Desk Organizer">
+                            </div>
+                            <h4>Ribbon Desk Organizer</h4>
+                            <p class="text-orange">₹850</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Ribbon Desk Organizer', 850, './images/img-32.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 33 -->
+                        <div class="card-yugs" data-category="vase" data-price="800">
+                            <div class="image-container">
+                                <img src="./images/img-33.jpeg" alt="Pastel Bow Vase Collection">
+                            </div>
+                            <h4>Pastel Bow Vase Collection</h4>
+                            <p class="text-orange">₹800</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Pastel Bow Vase Collection', 800, './images/img-33.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 34 -->
+                        <div class="card-yugs" data-category="planter" data-price="450">
+                            <div class="image-container">
+                                <img src="./images/img-34.jpeg" alt="Tiny Dino Succulent Planter">
+                            </div>
+                            <h4>Tiny Dino Succulent Planter</h4>
+                            <p class="text-orange">₹450</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Tiny Dino Succulent Planter', 450, './images/img-34.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 35 -->
+                        <div class="card-yugs" data-category="storage" data-price="1000">
+                            <div class="image-container">
+                                <img src="./images/img-35.jpeg" alt="Smart Cotton Storage Box">
+                            </div>
+                            <h4>Smart Cotton Storage Box</h4>
+                            <p class="text-orange">₹1000</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Smart Cotton Storage Box', 1000, './images/img-35.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 36 -->
+                        <div class="card-yugs" data-category="organizer" data-price="250">
+                            <div class="image-container">
+                                <img src="./images/img-36.jpeg" alt="Wooden Minimal Desk Organizer">
+                            </div>
+                            <h4>Wooden Minimal Desk Organizer</h4>
+                            <p class="text-orange">₹250</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Wooden Minimal Desk Organizer', 250, './images/img-36.jpeg')">ADD
+                                TO CART</button>
+                        </div>
+
+                        <!-- Product 37 -->
+                        <div class="card-yugs" data-category="holder" data-price="800">
+                            <div class="image-container">
+                                <img src="./images/img-37.jpeg" alt="Cute Cat Soap Holder">
+                            </div>
+                            <h4>Cute Cat Soap Holder</h4>
+                            <p class="text-orange">₹800</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Cute Cat Soap Holder', 800, './images/img-37.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+
+                        <!-- Product 38 -->
+                        <div class="card-yugs" data-category="organizer" data-price="1500">
+                            <div class="image-container">
+                                <img src="./images/img-6.jpeg" alt="Female Hoodie Desk Organizer">
+                            </div>
+                            <h4>Female Hoodie Desk Organizer</h4>
+                            <p class="text-orange">₹1500</p>
+                            <button class="btn-yugs"
+                                onclick="updateCart('Female Hoodie Desk Organizer', 1500, './images/img-6.jpeg')">ADD TO
+                                CART</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
+    <script src="script.js"></script>
     <script>
-        function updateCart(productName, price) {
-            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            cart.push({ name: productName, price: price });
-            localStorage.setItem('yugs_cart', JSON.stringify(cart));
+        function filterProducts() {
+            const searchInput = document.getElementById("searchInput");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const priceFilter = document.getElementById("priceFilter");
 
-            // Update counter
-            document.getElementById('count').innerText = cart.length;
-            alert(productName + " added to cart!");
+            const searchVal = searchInput ? searchInput.value.toLowerCase().trim() : "";
+            const categoryVal = categoryFilter ? categoryFilter.value.toLowerCase().trim() : "all";
+            const priceVal = priceFilter ? priceFilter.value : "all";
+
+            const productCards = document.querySelectorAll("#productList .card-yugs");
+
+            productCards.forEach(card => {
+                const heading = card.querySelector("h4");
+                if (!heading) return;
+
+                const name = heading.innerText.toLowerCase().trim();
+                const category = (card.dataset.category || "").toLowerCase().trim();
+                const price = parseInt(card.dataset.price || "0");
+
+                let displayFlag = true;
+
+                if (searchVal && !name.includes(searchVal)) displayFlag = false;
+                if (categoryVal !== "all" && categoryVal !== category) displayFlag = false;
+
+                if (priceVal === "under300" && price >= 300) displayFlag = false;
+                else if (priceVal === "300-500" && (price < 300 || price > 500)) displayFlag = false;
+                else if (priceVal === "500-1000" && (price < 500 || price > 1000)) displayFlag = false;
+                else if (priceVal === "1000-1500" && (price < 1000 || price > 1500)) displayFlag = false;
+                else if (priceVal === "above1500" && price <= 1500) displayFlag = false;
+
+                card.style.display = displayFlag ? "flex" : "none";
+            });
         }
-
-        // Load count on startup
         window.onload = function () {
-            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            document.getElementById('count').innerText = cart.length;
+            filterProducts();
         }
     </script>
+    <!-- Custom Popup Toast Notification Holder -->
+<div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
 </body>
 
 </html>
