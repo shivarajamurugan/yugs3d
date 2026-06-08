@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,35 +8,46 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="style.css">
+    
+    <!-- Script loaded safely with defer to prevent click race conditions -->
+    <script src="script.js" defer></script>
 </head>
+
 <body>
 
+    <!-- ================= NAVIGATION HEADER ================= -->
     <header>
         <div class="container">
             <nav>
                 <a href="index.html" class="logo">YUGS <span>3D</span></a>
-                <ul class="nav-links">
-                    <li><a href="index.html" class="active">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="store.html">Store</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <a href="cart.html" class="btn-yugs" style="text-decoration: none;">
-                    🛒 Cart (<span id="count">0</span>)
-                </a>
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html" class="active">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
+                    
+                    <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
             </nav>
         </div>
     </header>
 
-    <!-- HERO SECTION -->
+    <!-- ================= HERO SECTION ================= -->
     <section class="hero">
-        <div class="carousel" id="carousel-slides">
+        <div class="carousel">
             <div class="slide">
-                <img src="./images/WhatsApp Image 2026-05-06 at 12.02.15 PM (2).jpeg" alt="3D">
+                <img src="./images/img-15.jpeg" alt="Production Environment">
                 <div class="hero-overlay">
                     <div class="hero-content" data-aos="zoom-out" data-aos-duration="1500">
-                        <h1>BEYOND PRINTING</h1>
-                        <p>Industrial-grade additive manufacturing in Chennai.</p>
+                        <h1>3D PRINTING</h1>
+                        <p>Advanced Additive Manufacturing Solution for Prototyping, Creativity, and Production.</p>
                         <a href="store.html" class="btn-yugs">ENTER STORE</a>
                     </div>
                 </div>
@@ -43,7 +55,7 @@
         </div>
     </section>
 
-    <!-- CORE PROCESS SECTION -->
+    <!-- ================= CORE PROCESS SECTION ================= -->
     <section class="section-padding">
         <div class="container">
             <div class="grid">
@@ -53,22 +65,22 @@
                 </div>
                 <div class="card-yugs" data-aos="fade-up" data-aos-delay="200">
                     <h3 class="font-orbitron text-orange">02. Print</h3>
-                    <p>High-precision SLA and FDM technology for unmatched surface finish.</p>
+                    <p>High-precision FDM technology for unmatched surface finish.</p>
                 </div>
                 <div class="card-yugs" data-aos="fade-up" data-aos-delay="400">
                     <h3 class="font-orbitron text-orange">03. Deliver</h3>
-                    <p>Rapid prototyping and shipping across Chennai and beyond.</p>
+                    <p>Rapid prototyping and shipping across Karnataka and beyond.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: TECH STATS -->
+    <!-- ================= TECH STATS SECTION ================= -->
     <section class="section-padding" style="background: #151515; border-top: 1px solid rgba(0, 242, 255, 0.1);">
         <div class="container">
             <div style="display: flex; flex-wrap: wrap; justify-content: space-around; text-align: center; gap: 30px;">
                 <div data-aos="zoom-in">
-                    <h2 class="text-orange font-heading" style="font-size: 2.5rem;">25μm</h2>
+                    <h2 class="text-orange font-heading" style="font-size: 2.5rem;">0.05mm</h2>
                     <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Min Layer Height</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="200">
@@ -76,91 +88,111 @@
                     <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Projects Completed</p>
                 </div>
                 <div data-aos="zoom-in" data-aos-delay="400">
-                    <h2 class="text-orange font-heading" style="font-size: 2.5rem;">15+</h2>
+                    <h2 class="text-orange font-heading" style="font-size: 2.5rem;">10+</h2>
                     <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Materials Available</p>
+                </div>
+                <div data-aos="zoom-in" data-aos-delay="400">
+                    <h2 class="text-orange font-heading" style="font-size: 2.5rem;">30+</h2>
+                    <p style="text-transform: uppercase; font-size: 0.8rem; letter-spacing: 2px;">Filament Colors</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: FEATURED SHOWCASE -->
+    <!-- ================= FEATURED SHOWCASE ================= -->
     <section class="section-padding">
         <div class="container">
             <h2 class="font-heading text-center" style="margin-bottom: 50px;">FEATURED <span class="text-orange">WORK</span></h2>
             <div class="grid">
-                <div class="image-container" data-aos="fade-right" style="height: 400px;">
-                    <img src="./images/WhatsApp Image 2026-05-06 at 12.02.17 PM (1).jpeg" alt="Showcase 1">
+                <div class="card-yugs" data-aos="fade-right">
+                    <div class="image-container" style="height: 400px;">
+                        <img src="./images/temple.jpeg" alt="Complex Architecture Print">
+                    </div>
+                    <h4>Complex Architecture</h4>
                 </div>
-                <div class="image-container" data-aos="fade-left" style="height: 400px;">
-                    <img src="https://images.unsplash.com/photo-1581092160562-40aa08e78837" alt="Showcase 2">
+                <div class="card-yugs" data-aos="fade-left">
+                    <div class="image-container" style="height: 400px;">
+                        <img src="./images/statue.jpeg" alt="Detailed Sculpture Print">
+                    </div>
+                    <h4>Detailed Sculptures</h4>
                 </div>
             </div>
         </div>
     </section>
 
-
-    <!-- PORTFOLIO CAROUSEL SECTION -->
-<section class="section-padding" style="background: #0b0c10; overflow: hidden;">
-    <div class="container">
-        <div class="text-center" style="margin-bottom: 50px;" data-aos="fade-down">
-            <h2 class="font-heading">PROJECT <span class="text-orange">GALLERY</span></h2>
-            <p style="color: var(--text-muted);">Explore our latest industrial and creative commissions.</p>
-        </div>
-
-        <div class="portfolio-carousel-wrapper">
-            <div class="portfolio-carousel" id="portfolio-track">
-                <!-- Image 1 -->
-                <div class="portfolio-item">
-                    <img src="./images/WhatsApp Image 2026-05-06 at 12.02.17 PM (1).jpeg" alt="Industrial Part">
-                    <div class="portfolio-info">
-                        <h4 class="font-heading">Mechanical Gear</h4>
-                        <p>Material: Carbon Fiber Nylon</p>
-                    </div>
-                </div>
-                <!-- Image 2 -->
-                <div class="portfolio-item">
-                    <img src="./images/WhatsApp Image 2026-05-06 at 12.02.16 PM.jpeg" alt="Resin Print">
-                    <div class="portfolio-info">
-                        <h4 class="font-heading">Architecture Model</h4>
-                        <p>Material: High-Detail Resin</p>
-                    </div>
-                </div>
-                <!-- Image 3 -->
-                <div class="portfolio-item">
-                    <img src="./images/WhatsApp Image 2026-05-06 at 12.02.15 PM (1).jpeg" alt="Prototype">
-                    <div class="portfolio-info">
-                        <h4 class="font-heading">Electronic Housing</h4>
-                        <p>Material: Flame Retardant PLA</p>
-                    </div>
-                </div>
+    <!-- ================= PROJECT GALLERY CAROUSEL ================= -->
+    <section class="section-padding" style="background: #0b0c10;">
+        <div class="container">
+            <div class="text-center" style="margin-bottom: 50px;">
+                <h2 class="font-heading">PROJECT <span class="text-orange">GALLERY</span></h2>
+                <p style="color: var(--text-muted);">Explore our latest industrial and creative commissions.</p>
             </div>
-            
-            <!-- Navigation Buttons -->
-            <button class="portfolio-btn prev-p" onclick="movePortfolio(-1)">&#10094;</button>
-            <button class="portfolio-btn next-p" onclick="movePortfolio(1)">&#10095;</button>
-        </div>
-    </div>
-</section>
 
-    <!-- NEW SECTION: TESTIMONIALS -->
+            <div class="portfolio-carousel-wrapper">
+                <div class="portfolio-carousel-container">
+                    <div class="portfolio-carousel" id="portfolio-track">
+                        <div class="portfolio-item">
+                            <img src="./images/img-18.jpeg" alt="Industrial Mechanical Part">
+                            <div class="portfolio-info">
+                                <h4 class="font-heading">Mechanical Gear</h4>
+                                <p>Material: Carbon Fiber Nylon</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <img src="./images/img-23.jpeg" alt="Resin Architecture Unit">
+                            <div class="portfolio-info">
+                                <h4 class="font-heading">Architecture Model</h4>
+                                <p>Material: High-Detail Resin</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <img src="./images/img-24.jpeg" alt="Electronic Hardware Enclosure">
+                            <div class="portfolio-info">
+                                <h4 class="font-heading">Electronic Housing</h4>
+                                <p>Material: Flame Retardant PLA</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <img src="./images/img-15.jpeg" alt="Custom Prototype Shell">
+                            <div class="portfolio-info">
+                                <h4 class="font-heading">Drone Frame</h4>
+                                <p>Material: Carbon Fiber PETG</p>
+                            </div>
+                        </div>
+                        <div class="portfolio-item">
+                            <img src="./images/img-26.jpeg" alt="Creative Decor Piece">
+                            <div class="portfolio-info">
+                                <h4 class="font-heading">Geometric Vase</h4>
+                                <p>Material: Silk Rainbow PLA</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button class="portfolio-btn prev-p" aria-label="Previous Slide" onclick="movePortfolio(-1)">❮</button>
+                <button class="portfolio-btn next-p" aria-label="Next Slide" onclick="movePortfolio(1)">❯</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- ================= CLIENT FEEDBACK ================= -->
     <section class="section-padding" style="background: linear-gradient(180deg, #0b0c10 0%, #1f2833 100%);">
         <div class="container text-center">
             <h2 class="font-heading" style="margin-bottom: 50px;">CLIENT <span class="text-orange">FEEDBACK</span></h2>
-            <div class="grid">
-                <div class="card-yugs" style="border-style: dashed;">
-                    <p style="font-style: italic; color: var(--text-muted);">"The precision on the resin models for our Chennai project was incredible. Highly recommend YUGS 3D."</p>
+            <div class="grid feedback-grid">
+                <div class="card-yugs testimonial-card" data-aos="fade-up">
+                    <p class="testimonial-text">&ldquo;The precision on the resin models for our Bengaluru project was incredible. Highly recommend YUGS 3D.&rdquo;</p>
                     <h4 class="text-orange" style="margin-top: 15px;">- Arun Kumar</h4>
                 </div>
-                <div class="card-yugs" style="border-style: dashed;">
-                    <p style="font-style: italic; color: var(--text-muted);">"Fast delivery and great material strength. Their carbon-fiber prints are top notch."</p>
+                <div class="card-yugs testimonial-card" data-aos="fade-up" data-aos-delay="200">
+                    <p class="testimonial-text">&ldquo;Fast delivery and great material strength. Their carbon-fiber prints are top notch.&rdquo;</p>
                     <h4 class="text-orange" style="margin-top: 15px;">- Priya Sharma</h4>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- NEW SECTION: FOOTER -->
-    <footer style="padding: 50px 0; border-top: 1px solid #333; background: #070708;">
+    <!-- ================= GLOBAL FOOTER ================= -->
+    <footer style="padding: 50px 0; border-top: 1px solid #222; background: #070708;">
         <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
             <div>
                 <a href="#" class="logo">YUGS <span>3D</span></a>
@@ -181,38 +213,11 @@
         </div>
     </footer>
 
+    <!-- ================= BOTTOM INITIALIZATIONS ================= -->
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        AOS.init({
-            duration: 800,
-            offset: 150,
-            once: true
-        });
-
-        window.onload = function() {
-            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            document.getElementById('count').innerText = cart.length;
-        }
-
-        let portfolioIndex = 0;
-
-function movePortfolio(direction) {
-    const track = document.getElementById('portfolio-track');
-    const items = document.querySelectorAll('.portfolio-item');
-    const totalItems = items.length;
-    
-    // Adjust items visible per view based on screen width
-    const visibleItems = window.innerWidth > 768 ? 2 : 1;
-    const maxIndex = totalItems - visibleItems;
-
-    portfolioIndex += direction;
-
-    if (portfolioIndex < 0) portfolioIndex = 0;
-    if (portfolioIndex > maxIndex) portfolioIndex = maxIndex;
-
-    const offset = portfolioIndex * (100 / visibleItems);
-    track.style.transform = `translateX(-${offset}%)`;
-}
+        AOS.init({ duration: 800, offset: 150, once: true });
     </script>
 </body>
+
 </html>
