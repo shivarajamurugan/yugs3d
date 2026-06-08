@@ -2,130 +2,120 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Your Cart | YUGS 3D</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    <style>
-        .cart-item {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-            background: var(--bg-card);
-            padding: 15px;
-            border-radius: 10px;
-            margin-bottom: 15px;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        .cart-img {
-            width: 80px;
-            height: 80px;
-            object-fit: cover;
-            border-radius: 5px;
-        }
-        .cart-info {
-            flex-grow: 1;
-        }
-        .remove-btn {
-            background: transparent;
-            color: #ff4444;
-            border: 1px solid #ff4444;
-            padding: 5px 12px;
-            cursor: pointer;
-            border-radius: 4px;
-            font-size: 0.8rem;
-            transition: 0.3s;
-        }
-        .remove-btn:hover {
-            background: #ff4444;
-            color: white;
-        }
-    </style>
 </head>
 <body>
-    <header>
-        <div class="container">
-            <nav>
-                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+
+ <header>
+    <div class="container">
+        <nav>
+            <a href="index.html" class="logo">YUGS <span>3D</span></a>
+            <div class="nav-container">
                 <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
+                    <li><a href="index.html" >Home</a></li>
+                    <li><a href="about.html">About</a></li>
                     <li><a href="store.html">Store</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
-            </nav>
-        </div>
-    </header>
+                <a href="cart.html" class="btn-yugs active">🛒 Cart (<span id="count">0</span>) </a>
+                
+                <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </div>
+</header>
+
+    <div style="padding: 30px 5% 0 5%;">
+        <a href="store.html" class="back-btn">← Back to Store</a>
+    </div>
 
     <section class="section-padding">
         <div class="container">
             <h2 class="font-heading text-center" style="margin-bottom: 40px;">YOUR <span class="text-orange">CART</span></h2>
-            
-            <div id="cart-items" style="max-width: 700px; margin: 0 auto;">
-                <!-- Items injected here -->
-            </div>
 
-            <div class="text-center" style="margin-top: 40px;">
-                <h3 id="total-price" style="margin-bottom: 20px;">Total: ₹0</h3>
-                <button class="btn-yugs" onclick="sendWhatsApp()">ORDER VIA WHATSAPP</button>
+            <div id="cart-items" style="max-width: 750px; margin: 0 auto;">
+                </div>
+
+            <div class="text-center" style="margin-top: 50px;">
+                <h3 id="total-price" class="font-heading" style="margin-bottom: 25px; font-size: 1.6rem;">Total: ₹0</h3>
+                <button class="btn-yugs" style="font-size:0.9rem; padding:16px 36px;" onclick="sendWhatsAppOrder()">ORDER VIA WHATSAPP</button>
             </div>
         </div>
     </section>
 
-    <script>
-        function displayCart() {
-            const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            const container = document.getElementById('cart-items');
-            let total = 0;
+<script src="script.js"></script>
+<script>
+    function displayCart() {
+        // Retrieve the saved cart items from browser storage
+        const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+        const container = document.getElementById('cart-items');
+        let total = 0;
+
+        // If nothing is in the cart array, clear display out
+        if (cart.length === 0) {
+            container.innerHTML = "<p class='text-center' style='color:var(--text-muted); padding:40px 0;'>Your cart is empty.</p>";
+            document.getElementById('total-price').innerText = "Total: ₹0";
+            return;
+        }
+
+        // Map over each unique item index and pull the correct data vectors
+        container.innerHTML = cart.map((item, index) => {
+            total += item.price;
             
-            if (cart.length === 0) {
-                container.innerHTML = "<p class='text-center'>Your cart is empty.</p>";
-                document.getElementById('total-price').innerText = "Total: ₹0";
-                return;
-            }
-
-            container.innerHTML = cart.map((item, index) => {
-                total += item.price;
-                return `
-                    <div class="cart-item">
-                        <img src="${item.image}" class="cart-img" alt="${item.name}">
-                        <div class="cart-info">
-                            <h4 style="margin: 0;">${item.name}</h4>
-                            <span class="text-orange">₹${item.price}</span>
-                        </div>
-                        <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+            // FIX: item.image now correctly falls back to a placeholder only if missing
+            const productImgSrc = item.image ? item.image : './images/img-1.jpeg';
+            
+            return `
+                <div class="cart-item">
+                    <img src="${productImgSrc}" class="cart-img" alt="${item.name}">
+                    <div class="cart-info">
+                        <h4 style="margin: 0;">${item.name}</h4>
+                        <span class="text-orange">₹${item.price}</span>
                     </div>
-                `;
-            }).join('');
+                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                </div>
+            `;
+        }).join('');
 
-            document.getElementById('total-price').innerText = "Total: ₹" + total;
-        }
+        document.getElementById('total-price').innerText = "Total: ₹" + total;
+    }
 
-        function removeItem(index) {
-            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            // Remove the item at the specific index
-            cart.splice(index, 1);
-            // Save updated cart
-            localStorage.setItem('yugs_cart', JSON.stringify(cart));
-            // Refresh display
-            displayCart();
-        }
-
-        function sendWhatsApp() {
-            const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-            if (cart.length === 0) return alert("Cart is empty!");
-
-            let phoneNumber = "918524960408"; 
-            let message = "Hello YUGS 3D! 👋%0aI want to order:%0a%0a";
-            let total = 0;
-
-            cart.forEach((item, i) => {
-                message += `${i+1}. ${item.name} - ₹${item.price}%0a`;
-                total += item.price;
-            });
-
-            message += `%0a*Total: ₹${total}*`;
-            window.open(`https://wa.me/${phoneNumber}?text=${message}`, '_blank');
-        }
-
+    function removeItem(index) {
+        let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+        // Remove the targeted product array block at its position index
+        cart.splice(index, 1);
+        // Resave updated array state
+        localStorage.setItem('yugs_cart', JSON.stringify(cart));
+        // Force immediate window re-render updates
         displayCart();
-    </script>
+        updateCartCount();
+    }
+
+    function toggleMenu() {
+        document.querySelector(".nav-links").classList.toggle("show");
+    }
+
+    function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+        const mobileBadge = document.getElementById('cart-count');
+        const desktopBadge = document.getElementById('count');
+        
+        if (mobileBadge) mobileBadge.innerText = cart.length;
+        if (desktopBadge) desktopBadge.innerText = cart.length;
+    }
+
+    // Initialize full display calculations on document mount
+    window.onload = function() {
+        displayCart();
+        updateCartCount();
+    };
+</script>
 </body>
 </html>
