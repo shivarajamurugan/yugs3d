@@ -1,6 +1,6 @@
 # 🚀 YUGS 3D – Premium 3D Printing Store & Manufacturing Website
 
-![YUGS 3D](./images/yugaschit.jpeg)
+
 
 ## 📌 Overview
 
