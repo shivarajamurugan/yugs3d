@@ -12,28 +12,28 @@
 
 <body>
 
-   <header>
-    <div class="container">
-        <nav>
-            <a href="index.html" class="logo">YUGS <span>3D</span></a>
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="store.html" class="active">Store</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
-                
-                <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-    </div>
-</header>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="store.html" class="active">Store</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
+
+                    <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <section class="section-padding">
         <div class="container">
@@ -74,14 +74,16 @@
                             <option value="above1500">Above ₹1500</option>
                         </select>
                     </div>
+
+                    <button type="button" class="btn-clear-filters" onclick="clearAllFilters()">CLEAR FILTERS</button>
                 </aside>
 
                 <div class="products-area">
                     <div class="grid" id="productList">
                         <!-- Product 1 -->
                         <div class="card-yugs" data-category="Organizer" data-price="1000">
-                            <div class="image-container">
-                                <img src="./images/img-1.jpeg" alt="Hex Pot">
+                            <div class="image-container" style="cursor: pointer;" onclick="openProductModal('Desk Organizer', 1000, './images/img-1.jpeg')">
+                                <img src="./images/img-1.jpeg" alt="Hex Pot" loading="lazy">
                             </div>
                             <h4>Desk Organizer</h4>
                             <p class="text-orange">₹1000</p>
@@ -92,7 +94,7 @@
                         <!-- Product 2 -->
                         <div class="card-yugs" data-category="Headphone Stand" data-price="899">
                             <div class="image-container">
-                                <img src="./images/img-2.jpeg" alt="EDC Tray">
+                                <img src="./images/img-2.jpeg" alt="EDC Tray" loading="lazy">
                             </div>
                             <h4>Cactus Headphone Stand</h4>
                             <p class="text-orange">₹899</p>
@@ -509,7 +511,7 @@
                         <!-- Product 37 -->
                         <div class="card-yugs" data-category="holder" data-price="800">
                             <div class="image-container">
-                                <img src="./images/img-37.jpeg" alt="Cute Cat Soap Holder">
+                                <img src="./images/img-37.jpeg" alt="Cute Cat Soap Holder" loading="lazy">
                             </div>
                             <h4>Cute Cat Soap Holder</h4>
                             <p class="text-orange">₹800</p>
@@ -520,8 +522,8 @@
 
                         <!-- Product 38 -->
                         <div class="card-yugs" data-category="organizer" data-price="1500">
-                            <div class="image-container">
-                                <img src="./images/img-6.jpeg" alt="Female Hoodie Desk Organizer">
+                            <div class="image-container" >
+                                <img src="./images/img-6.jpeg" alt="Female Hoodie Desk Organizer" loading="lazy">
                             </div>
                             <h4>Female Hoodie Desk Organizer</h4>
                             <p class="text-orange">₹1500</p>
@@ -534,6 +536,50 @@
             </div>
         </div>
     </section>
+
+
+    <!-- ================= GLOBAL FOOTER ================= -->
+    <footer style="padding: 50px 0; border-top: 1px solid #222; background: #070708;">
+        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+            <div>
+                <a href="#" class="logo">YUGS <span>3D</span></a>
+                <p style="margin-top: 10px; color: #666; max-width: 250px;">Precision manufacturing solutions for the
+                    modern world.</p>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">QUICK LINKS</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li><a href="about.html" style="color: #888; text-decoration: none;">About</a></li>
+                    <li><a href="store.html" style="color: #888; text-decoration: none;">Products</a></li>
+                    <li><a href="contact.html" style="color: #888; text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">FOLLOW US</h4>
+                <p style="color: #888;">Instagram | LinkedIn</p>
+            </div>
+
+        </div>
+        <p style="margin-top:30px; font-size:0.8rem; color:#555; text-align: center;">© 2026 YUGS 3D. All Rights
+            Reserved.</p>
+
+    </footer>
+
+    <button id="backToTop" class="btn-yugs"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99; border-radius: 50%; padding: 15px;"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
+
+    <script>
+        window.onscroll = function () {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script>
+
 
     <script src="script.js"></script>
     <script>
@@ -548,6 +594,7 @@
 
             const productCards = document.querySelectorAll("#productList .card-yugs");
 
+            // 1. Loop through all items and display/hide them based on criteria
             productCards.forEach(card => {
                 const heading = card.querySelector("h4");
                 if (!heading) return;
@@ -569,13 +616,63 @@
 
                 card.style.display = displayFlag ? "flex" : "none";
             });
+
+            // 2. CHECK EMPTY STATE (Now safely running INSIDE the function after the loop finishes)
+            const visibleCards = document.querySelectorAll("#productList .card-yugs[style*='display: flex']");
+            let noResultMsg = document.getElementById("no-products-msg");
+
+            if (visibleCards.length === 0) {
+                if (!noResultMsg) {
+                    noResultMsg = document.createElement("p");
+                    noResultMsg.id = "no-products-msg";
+                    noResultMsg.innerText = "No custom prints match your current filters.";
+                    noResultMsg.style.cssText = "color: var(--text-muted); text-align: center; padding: 40px 0; grid-column: 1/-1; font-family: var(--font-body);";
+                    document.getElementById("productList").appendChild(noResultMsg);
+                }
+            } else if (noResultMsg) {
+                noResultMsg.remove();
+            }
         }
+
+        // Run filters on initial page mount
         window.onload = function () {
+            filterProducts();
+        }
+
+        // Reset button execution matrix
+        function clearAllFilters() {
+            const searchInput = document.getElementById("searchInput");
+            const categoryFilter = document.getElementById("categoryFilter");
+            const priceFilter = document.getElementById("priceFilter");
+
+            if (searchInput) searchInput.value = "";
+            if (categoryFilter) categoryFilter.value = "all";
+            if (priceFilter) priceFilter.value = "all";
+
             filterProducts();
         }
     </script>
     <!-- Custom Popup Toast Notification Holder -->
-<div id="toast-container" style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;"></div>
+    <div id="toast-container"
+        style="position: fixed; bottom: 30px; right: 30px; z-index: 9999; display: flex; flex-direction: column; gap: 10px;">
+    </div>
+
+
+    <div id="quickview-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(11, 12, 16, 0.9); z-index: 10000; align-items: center; justify-content: center; padding: 20px;" onclick="closeProductModal()">
+        <div style="background: var(--bg-card); max-width: 650px; width: 100%; border-radius: 12px; border: 1px solid var(--color-accent); padding: 30px; position: relative; display: flex; flex-wrap: wrap; gap: 30px;" onclick="event.stopPropagation()">
+            <button onclick="closeProductModal()" style="position: absolute; top: 15px; right: 20px; background: transparent; border: none; color: #fff; font-size: 1.5rem; cursor: pointer;">✕</button>
+            <img id="modal-product-img" src="" alt="Product Detail Image" style="width: 240px; height: 240px; object-fit: cover; border-radius: 8px; background: var(--bg-dark); margin: 0 auto;">
+            <div style="flex: 1; min-width: 260px; display: flex; flex-direction: column; justify-content: center;">
+                <h2 id="modal-product-name" class="font-orbitron" style="margin-bottom: 10px;"></h2>
+                <p id="modal-product-price" class="text-orange" style="font-size: 1.4rem; font-weight: bold; margin-bottom: 15px;"></p>
+                <div style="background: var(--bg-dark); padding: 10px 15px; border-radius: 4px; font-size: 0.85rem; border-left: 3px solid var(--color-accent); margin-bottom: 15px;">⚡ Layer Height Precision: 0.05mm optimized</div>
+                <p style="color: var(--text-muted); font-size: 0.9rem; line-height: 1.5;">Premium high-durability production piece optimized for clean surface finish, structural integrity, and desk aesthetics.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast-container" ...></div>
+
 </body>
 
 </html>
