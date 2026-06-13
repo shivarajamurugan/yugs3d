@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -14,52 +15,104 @@
             gap: 40px;
             align-items: flex-start;
         }
+
         .contact-form-container {
             flex: 1;
             min-width: 300px;
         }
+
+        /* Forms Uniform Style Scope Injection */
+        .custom-print-form h3 {
+            font-family: var(--font-heading);
+            margin-bottom: 25px;
+            color: #ffffff;
+            letter-spacing: 0.5px;
+        }
+
+        .custom-print-form label {
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 8px;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .custom-print-form input,
+        .custom-print-form select {
+            width: 100%;
+            padding: 14px;
+            background: var(--bg-dark);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            font-family: var(--font-body);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+
+        /* Custom File Input Theme Overlay */
+        .custom-print-form input[type="file"] {
+            padding: 10px;
+            background: rgba(31, 40, 51, 0.5);
+            cursor: pointer;
+        }
+
+        .custom-print-form input:focus,
+        .custom-print-form select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 10px rgba(0, 242, 255, 0.2);
+        }
+
+        .custom-print-form .btn-yugs {
+            margin-top: 25px;
+            width: 100%;
+        }
+
         .contact-map-container {
             flex: 1;
             min-width: 300px;
-            height: 450px;
+            height: 480px;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid rgba(0, 242, 255, 0.2);
         }
+
         iframe {
             width: 100%;
             height: 100%;
-            filter: grayscale(1) invert(0.9) contrast(1.2); /* Makes map match dark theme */
-        }
-        .contact-info-box {
-            margin-bottom: 30px;
+            border: none;
+            filter: grayscale(1) invert(0.9) contrast(1.2); /* Keeps the map inline with dark cyberpunk theme */
         }
     </style>
 </head>
+
 <body>
 
-   <header>
-    <div class="container">
-        <nav>
-            <a href="index.html" class="logo">YUGS <span>3D</span></a>
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="index.html" >Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="store.html">Store</a></li>
-                    <li><a href="contact.html"class="active">Contact</a></li>
-                </ul>
-                <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
-                
-                <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-    </div>
-</header>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="contact.html" class="active">Contact</a></li>
+                    </ul>
+                    <a href="cart.html" class="btn-yugs">🛒 Cart (<span id="count">0</span>)</a>
+
+                    <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <section class="container section-padding">
         <div class="text-center" style="margin-bottom: 50px;">
@@ -69,32 +122,29 @@
 
         <div class="contact-wrapper">
             <div class="contact-form-container">
-                <form action="https://formspree.io/f/YOUR_FORMSPREE_ENDPOINT_ID" method="POST" class="card-yugs">
-                    <div class="contact-info-box">
-                        <h4 class="text-orange font-heading" style="font-size: 1rem; margin-bottom: 10px;">Custom Quote</h4>
-                        <p style="font-size: 0.9rem; color: var(--text-muted);">Fill out the details below and we will get back to you within 24 hours.</p>
-                    </div>
+                <form class="custom-print-form" onsubmit="handleQuoteSubmit(event)">
+                    <h3>Upload Your Own Design</h3>
                     
-                    <div class="mb-3">
-                        <label style="display:block; margin-bottom:8px; font-size:0.85rem; text-transform:uppercase; color:var(--text-muted);">Name</label>
-                        <input type="text" name="name" placeholder="Enter your name" required>
-                    </div>
-                    <div class="mb-3">
-                        <label style="display:block; margin-bottom:8px; font-size:0.85rem; text-transform:uppercase; color:var(--text-muted);">Email</label>
-                        <input type="email" name="email" placeholder="Enter your email" required>
-                    </div>
-                    <div class="mb-3">
-                        <label style="display:block; margin-bottom:8px; font-size:0.85rem; text-transform:uppercase; color:var(--text-muted);">Message</label>
-                        <textarea name="message" rows="5" placeholder="Describe your 3D printing requirements..." required></textarea>
-                    </div>
-                    
-                    <button type="submit" class="btn-yugs w-100">SEND INQUIRY</button>
+                    <label for="clientName">Your Name</label>
+                    <input type="text" id="clientName" placeholder="Enter your full name" required>
+
+                    <label for="materialSelect">Select Material Focus</label>
+                    <select id="materialSelect">
+                        <option value="PLA">PLA (Decorative / Standard Prototyping)</option>
+                        <option value="PETG">PETG (Durable / High Functional Load)</option>
+                        <option value="Resin">Resin (High-Precision / Micro Details)</option>
+                    </select>
+
+                    <label for="stlUpload">Upload 3D File (.STL, .OBJ, .ZIP)</label>
+                    <input type="file" id="stlUpload" accept=".stl,.obj,.zip" required>
+
+                    <button type="submit" class="btn-yugs">REQUEST PRICING QUOTE</button>
                 </form>
             </div>
 
             <div class="contact-map-container">
                 <iframe 
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3886.987808187777!2d77.52287667489419!3d13.036447887284899!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3bae3d236e7713b7%3A0xa70ed02a28cf01e5!2sPeenya%20Industry!5e0!3m2!1sen!2sin!4v1779991358701!5m2!1sen!2sin" 
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d15626.244304855581!2d78.13636534575973!3d11.654763261280388!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3babf1ccf52c614f%3A0x6cf02203cfc40ec4!2sSalem%2C%20Tamil%20Nadu!5e0!3m2!1sen!2sin!4v1710000000000!5m2!1sen!2sin" 
                     allowfullscreen="" 
                     loading="lazy" 
                     referrerpolicy="no-referrer-when-downgrade">
@@ -103,6 +153,59 @@
         </div>
     </section>
 
+    <footer style="padding: 50px 0; border-top: 1px solid #222; background: #070708;">
+        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+            <div>
+                <a href="#" class="logo">YUGS <span>3D</span></a>
+                <p style="margin-top: 10px; color: #666; max-width: 250px;">Precision manufacturing solutions for the modern world.</p>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">QUICK LINKS</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li><a href="about.html" style="color: #888; text-decoration: none;">About</a></li>
+                    <li><a href="store.html" style="color: #888; text-decoration: none;">Products</a></li>
+                    <li><a href="contact.html" style="color: #888; text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">FOLLOW US</h4>
+                <p style="color: #888;">Instagram | LinkedIn</p>
+            </div>
+        </div>
+        <p style="margin-top:30px; font-size:0.8rem; color:#555; text-align: center;">© 2026 YUGS 3D. All Rights Reserved.</p>
+    </footer>
+
+    <button id="backToTop" class="btn-yugs"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99; border-radius: 50%; padding: 15px;"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
+
+    <script>
+        window.onscroll = function () {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script>
+
     <script src="script.js"></script>
+    <script>
+        function handleQuoteSubmit(event) {
+            event.preventDefault();
+            
+            const name = document.getElementById("clientName").value;
+            const material = document.getElementById("materialSelect").value;
+            const fileInput = document.getElementById("stlUpload");
+            const filename = fileInput.files[0] ? fileInput.files[0].name : "No file attached";
+
+            // Temporary alerts context styled notification fallback
+            alert(`Thank you, ${name}!\nYour custom quote request for an item using [${material}] (File: ${filename}) has been initiated. Our production unit will respond shortly.`);
+            
+            event.target.reset();
+        }
+    </script>
 </body>
+
 </html>
