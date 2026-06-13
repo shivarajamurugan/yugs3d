@@ -1,36 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Your Cart | YUGS 3D</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap" rel="stylesheet">
+    <title>Cart | YUGS 3D</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Orbitron:wght@600&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
- <header>
-    <div class="container">
-        <nav>
-            <a href="index.html" class="logo">YUGS <span>3D</span></a>
-            <div class="nav-container">
-                <ul class="nav-links">
-                    <li><a href="index.html" >Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="store.html">Store</a></li>
-                    <li><a href="contact.html">Contact</a></li>
-                </ul>
-                <a href="cart.html" class="btn-yugs active">🛒 Cart (<span id="count">0</span>) </a>
-                
-                <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
-            </div>
-        </nav>
-    </div>
-</header>
+    <header>
+        <div class="container">
+            <nav>
+                <a href="index.html" class="logo">YUGS <span>3D</span></a>
+                <div class="nav-container">
+                    <ul class="nav-links">
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="about.html">About</a></li>
+                        <li><a href="store.html">Store</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                    </ul>
+                    <a href="cart.html" class="btn-yugs active">🛒 Cart (<span id="count">0</span>) </a>
+                    <button class="menu-toggle" aria-label="Open Navigation" onclick="toggleMenu()">
+                        <span></span><span></span><span></span>
+                    </button>
+                </div>
+            </nav>
+        </div>
+    </header>
 
     <div style="padding: 30px 5% 0 5%;">
         <a href="store.html" class="back-btn">← Back to Store</a>
@@ -38,84 +38,170 @@
 
     <section class="section-padding">
         <div class="container">
-            <h2 class="font-heading text-center" style="margin-bottom: 40px;">YOUR <span class="text-orange">CART</span></h2>
-
-            <div id="cart-items" style="max-width: 750px; margin: 0 auto;">
-                </div>
+            <h2 class="font-heading text-center" style="margin-bottom: 40px;">YOUR <span class="text-orange">CART</span>
+            </h2>
+            <div id="cart-items" style="max-width: 750px; margin: 0 auto;"></div>
 
             <div class="text-center" style="margin-top: 50px;">
                 <h3 id="total-price" class="font-heading" style="margin-bottom: 25px; font-size: 1.6rem;">Total: ₹0</h3>
-                <button class="btn-yugs" style="font-size:0.9rem; padding:16px 36px;" onclick="sendWhatsAppOrder()">ORDER VIA WHATSAPP</button>
+                <button class="btn-yugs" style="font-size:0.9rem; padding:16px 36px;"
+                    onclick="sendWhatsAppOrderGrouped()">ORDER VIA WHATSAPP</button>
             </div>
         </div>
     </section>
 
-<script src="script.js"></script>
-<script>
-    function displayCart() {
-        // Retrieve the saved cart items from browser storage
-        const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-        const container = document.getElementById('cart-items');
-        let total = 0;
+    <button id="backToTop" class="btn-yugs"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99; border-radius: 50%; padding: 15px;"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
 
-        // If nothing is in the cart array, clear display out
-        if (cart.length === 0) {
-            container.innerHTML = "<p class='text-center' style='color:var(--text-muted); padding:40px 0;'>Your cart is empty.</p>";
-            document.getElementById('total-price').innerText = "Total: ₹0";
-            return;
+    <script>
+        window.onscroll = function () {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script>
+
+
+    <footer style="padding: 50px 0; border-top: 1px solid #222; background: #070708;">
+        <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
+            <div>
+                <a href="#" class="logo">YUGS <span>3D</span></a>
+                <p style="margin-top: 10px; color: #666; max-width: 250px;">Precision manufacturing solutions for the
+                    modern world.</p>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">QUICK LINKS</h4>
+                <ul style="list-style: none; line-height: 2;">
+                    <li><a href="about.html" style="color: #888; text-decoration: none;">About</a></li>
+                    <li><a href="store.html" style="color: #888; text-decoration: none;">Products</a></li>
+                    <li><a href="contact.html" style="color: #888; text-decoration: none;">Contact</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">FOLLOW US</h4>
+                <p style="color: #888;">Instagram | LinkedIn</p>
+            </div>
+        </div>
+        <p style="margin-top:30px; font-size:0.8rem; color:#555; text-align: center;">© 2026 YUGS 3D. All Rights
+            Reserved.</p>
+    </footer>
+
+    <script src="script.js"></script>
+    <script>
+        function getGroupedCart() {
+            const rawCart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            const grouped = {};
+
+            rawCart.forEach(item => {
+                if (grouped[item.name]) {
+                    grouped[item.name].quantity += 1;
+                } else {
+                    grouped[item.name] = {
+                        name: item.name,
+                        price: item.price,
+                        image: item.image,
+                        quantity: 1
+                    };
+                }
+            });
+            return Object.values(grouped);
         }
 
-        // Map over each unique item index and pull the correct data vectors
-        container.innerHTML = cart.map((item, index) => {
-            total += item.price;
-            
-            // FIX: item.image now correctly falls back to a placeholder only if missing
-            const productImgSrc = item.image ? item.image : './images/img-1.jpeg';
-            
-            return `
+        function displayCart() {
+            const groupedCart = getGroupedCart();
+            const container = document.getElementById('cart-items');
+            let total = 0;
+
+            if (groupedCart.length === 0) {
+                container.innerHTML = "<p class='text-center' style='color:var(--text-muted); padding:40px 0;'>Your cart is empty.</p>";
+                document.getElementById('total-price').innerText = "Total: ₹0";
+                return;
+            }
+
+            container.innerHTML = groupedCart.map((item) => {
+                const itemTotalSub = item.price * item.quantity;
+                total += itemTotalSub;
+                const productImgSrc = item.image ? item.image : './images/img-1.jpeg';
+
+                return `
                 <div class="cart-item">
                     <img src="${productImgSrc}" class="cart-img" alt="${item.name}">
                     <div class="cart-info">
-                        <h4 style="margin: 0;">${item.name}</h4>
-                        <span class="text-orange">₹${item.price}</span>
+                        <h4 style="margin: 0 0 5px 0;">${item.name}</h4>
+                        <span class="text-orange">₹${item.price} each</span>
                     </div>
-                    <button class="remove-btn" onclick="removeItem(${index})">Remove</button>
+                    
+                    <div class="quantity-control">
+                        <button class="qty-btn" onclick="adjustItemQuantity('${item.name}', -1)">-</button>
+                        <span class="qty-val">${item.quantity}</span>
+                        <button class="qty-btn" onclick="adjustItemQuantity('${item.name}', 1)">+</button>
+                    </div>
+
+                    <div style="min-width: 80px; text-align: right;">
+                        <h4 style="margin: 0;">₹${itemTotalSub}</h4>
+                    </div>
+                    <button class="remove-btn" onclick="completelyRemoveItem('${item.name}')">Remove</button>
                 </div>
             `;
-        }).join('');
+            }).join('');
 
-        document.getElementById('total-price').innerText = "Total: ₹" + total;
-    }
+            document.getElementById('total-price').innerText = "Total: ₹" + total;
+        }
 
-    function removeItem(index) {
-        let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-        // Remove the targeted product array block at its position index
-        cart.splice(index, 1);
-        // Resave updated array state
-        localStorage.setItem('yugs_cart', JSON.stringify(cart));
-        // Force immediate window re-render updates
-        displayCart();
-        updateCartCount();
-    }
+        function adjustItemQuantity(productName, delta) {
+            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
 
-    function toggleMenu() {
-        document.querySelector(".nav-links").classList.toggle("show");
-    }
+            if (delta === 1) {
+                const match = cart.find(item => item.name === productName);
+                if (match) { cart.push({ ...match }); }
+            } else if (delta === -1) {
+                const index = cart.findIndex(item => item.name === productName);
+                if (index !== -1) { cart.splice(index, 1); }
+            }
 
-    function updateCartCount() {
-        const cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
-        const mobileBadge = document.getElementById('cart-count');
-        const desktopBadge = document.getElementById('count');
-        
-        if (mobileBadge) mobileBadge.innerText = cart.length;
-        if (desktopBadge) desktopBadge.innerText = cart.length;
-    }
+            localStorage.setItem('yugs_cart', JSON.stringify(cart));
+            displayCart();
+            if (typeof updateCartDisplayCount === "function") { updateCartDisplayCount(); }
+        }
 
-    // Initialize full display calculations on document mount
-    window.onload = function() {
-        displayCart();
-        updateCartCount();
-    };
-</script>
+        function completelyRemoveItem(productName) {
+            let cart = JSON.parse(localStorage.getItem('yugs_cart')) || [];
+            cart = cart.filter(item => item.name !== productName);
+
+            localStorage.setItem('yugs_cart', JSON.stringify(cart));
+            displayCart();
+            if (typeof updateCartDisplayCount === "function") { updateCartDisplayCount(); }
+        }
+
+        function sendWhatsAppOrderGrouped() {
+            const groupedCart = getGroupedCart();
+            if (groupedCart.length === 0) return alert("Your current selection matrix is empty!");
+
+            const dispatchPhone = "918553751370";
+            let textPayload = "Hello YUGS 3D! 👋\nI would like to place an order for the following prints:\n\n";
+            let billTotal = 0;
+
+            groupedCart.forEach((product, index) => {
+                const dynamicSubTotal = product.price * product.quantity;
+                textPayload += `${index + 1}. *${product.name}* (x${product.quantity}) - ₹${dynamicSubTotal}\n`;
+                billTotal += dynamicSubTotal;
+            });
+
+            textPayload += `\n*Grand Total Order Value: ₹${billTotal}*`;
+
+            const operationalURL = `https://wa.me/${dispatchPhone}?text=${encodeURIComponent(textPayload)}`;
+            window.open(operationalURL, '_blank');
+        }
+
+        window.onload = function () {
+            displayCart();
+            if (typeof updateCartDisplayCount === "function") { updateCartDisplayCount(); }
+        };
+    </script>
 </body>
+
 </html>
