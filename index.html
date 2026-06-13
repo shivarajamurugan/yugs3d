@@ -7,6 +7,11 @@
     <title>YUGS 3D | Precision Manufacturing</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;500;700&family=Orbitron:wght@600;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    
+    <script type="module" src="https://unpkg.com/@google/model-viewer/dist/model-viewer.min.js"></script>
+
+    <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="style.css">
     
     <!-- Script loaded safely with defer to prevent click race conditions -->
@@ -191,6 +196,21 @@
         </div>
     </section>
 
+
+    <button id="backToTop" class="btn-yugs"
+        style="position: fixed; bottom: 30px; right: 30px; display: none; z-index: 99; border-radius: 50%; padding: 15px;"
+        onclick="window.scrollTo({top: 0, behavior: 'smooth'});">▲</button>
+
+    <script>
+        window.onscroll = function () {
+            const btn = document.getElementById("backToTop");
+            if (document.body.scrollTop > 300 || document.documentElement.scrollTop > 300) {
+                btn.style.display = "block";
+            } else {
+                btn.style.display = "none";
+            }
+        };
+    </script>
     <!-- ================= GLOBAL FOOTER ================= -->
     <footer style="padding: 50px 0; border-top: 1px solid #222; background: #070708;">
         <div class="container" style="display: flex; justify-content: space-between; flex-wrap: wrap; gap: 30px;">
@@ -201,7 +221,7 @@
             <div>
                 <h4 class="font-heading" style="font-size: 0.9rem; margin-bottom: 15px;">QUICK LINKS</h4>
                 <ul style="list-style: none; line-height: 2;">
-                    <li><a href="about.html" style="color: #888; text-decoration: none;">Technology</a></li>
+                    <li><a href="about.html" style="color: #888; text-decoration: none;">About</a></li>
                     <li><a href="store.html" style="color: #888; text-decoration: none;">Products</a></li>
                     <li><a href="contact.html" style="color: #888; text-decoration: none;">Contact</a></li>
                 </ul>
@@ -211,6 +231,8 @@
                 <p style="color: #888;">Instagram | LinkedIn</p>
             </div>
         </div>
+        <p style="margin-top:30px; font-size:0.8rem; color:#555; text-align: center;">© 2026 YUGS 3D. All Rights
+            Reserved.</p>
     </footer>
 
     <!-- ================= BOTTOM INITIALIZATIONS ================= -->
